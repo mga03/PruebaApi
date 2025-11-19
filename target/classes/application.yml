@@ -1,0 +1,33 @@
+server:
+  port: 8083 # Tu API se iniciará en http://localhost:8083
+
+spring:
+  # ----------------------------------------
+  # 1. Configuracion de la Fuente de Datos (BD)
+  # ----------------------------------------
+  datasource:
+    # **IMPORTANTE: PUERTO 3307 para Docker**
+    url: jdbc:mysql://127.0.0.1:3307/GestorProyectos
+    username: root
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  # ----------------------------------------
+  # 2. Configuracion de JPA / Hibernate
+  # ----------------------------------------
+  jpa:
+    # Soluciona el error 'Not a managed type' al decirle a Hibernate dónde buscar las @Entity
+    packages-to-scan: model 
+    
+    hibernate:
+      ddl-auto: none # No crear/borrar tablas
+    
+    show-sql: true # Muestra las consultas SQL
+
+    properties:
+      hibernate:
+        # Define el dialecto correcto para MySQL 
+        dialect: org.hibernate.dialect.MySQLDialect
+        jdbc:
+          # Define la zona horaria
+          time_zone: UTC
